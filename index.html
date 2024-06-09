@@ -1,20 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
     <title>NOSTYLIST</title>
     <style>
         html {
             scroll-behavior: smooth;
         }
-
         .modal {
             transition: opacity 0.3s ease;
         }
-
         .bg-animation {
             position: fixed;
             top: 0;
@@ -24,117 +22,72 @@
             z-index: -1;
             overflow: hidden;
         }
-
         .circle {
             position: absolute;
             border-radius: 50%;
             opacity: 0.5;
             animation: move 40s linear infinite;
         }
-
         .circle.black {
             background-color: black;
         }
-
         .circle.white {
             background-color: rgb(74, 63, 63);
         }
-
         @keyframes move {
             0% {
                 transform: translate(0, 0);
             }
-
             25% {
                 transform: translate(50vw, 50vh);
             }
-
             50% {
                 transform: translate(-50vw, 50vh);
             }
-
             75% {
                 transform: translate(50vw, -50vh);
             }
-
             100% {
                 transform: translate(0, 0);
             }
         }
-
         .nav-link {
             font-weight: bold;
             color: black;
             padding: 0.5rem 1rem;
         }
-
         .nav-link:hover {
             color: gray;
         }
-
         .fixed-header {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
-            background-color: rgba(255, 255, 255, 0.8);
-            /* Light background with opacity */
+            background-color: rgba(255, 255, 255, 0.8); /* Light background with opacity */
             z-index: 1000;
             transition: background-color 0.3s ease;
         }
-
         .scrolled-header {
-            background-color: rgba(255, 255, 255, 0.9);
-            /* Slightly darker background when scrolled */
+            background-color: rgba(255, 255, 255, 0.9); /* Slightly darker background when scrolled */
         }
-
         .scroll-offset {
-            scroll-margin-top: 100px;
-            /* Adjust this value according to the header height */
+            scroll-margin-top: 100px; /* Adjust this value according to the header height */
         }
-
-        .modal-open {
-            overflow: hidden;
-        }
-
-        .modal-open .modal {
-            background-color: black;
-        }
-
-        .modal-open .modal button {
-            background-color: white;
-            color: black;
-        }
-
-        .modal-open .modal select {
-            font-family: 'Arial', sans-serif;
-            font-size: 1rem;
-        }
-
-        .team-member:hover .team-info {
-            display: block;
-        }
-
-        .team-info {
-            display: none;
-            position: absolute;
-            bottom: 10px;
-            left: 50%;
-            transform: translateX(-50%);
-            background-color: rgba(0, 0, 0, 0.7);
-            color: white;
-            padding: 5px;
-            border-radius: 5px;
-            text-align: center;
-        }
-
         .selected {
             border: 3px solid white;
         }
+        .team-info {
+            display: none;
+        }
+        .team-member:hover .team-info {
+            display: block;
+        }
+        .modal-open {
+            overflow: hidden;
+        }
     </style>
-    <link href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css" rel="stylesheet">
 </head>
-
 <body class="relative">
     <div class="bg-animation">
         <div class="circle black" style="width: 150px; height: 150px; top: 10%; left: 10%;"></div>
@@ -157,13 +110,12 @@
                 </nav>
             </div>
         </header>
-        <main class="w-full max-w-6xl mt-16">
-            <!-- Added top margin to offset fixed header -->
+        <main class="w-full max-w-6xl mt-16"> <!-- Added top margin to offset fixed header -->
             <section class="text-center py-8" id="home">
                 <h1 class="text-5xl font-extrabold">NOSTYLIST</h1>
                 <p class="text-zinc-500">Sharp Styles, Simplified</p>
             </section>
-
+            
             <section class="grid grid-cols-1 md:grid-cols-2 gap-8 py-8 scroll-offset" id="about-us">
                 <div class="p-4 flex items-center justify-center">
                     <img src="aboutus1.jpeg" class="rounded-lg">
@@ -178,7 +130,7 @@
                     </p>
                 </div>
             </section>
-
+            
             <section class="grid grid-cols-1 md:grid-cols-2 gap-8 py-8 scroll-offset">
                 <div class="p-4 flex items-center justify-center">
                     <h2 class="text-5xl font-bold text-center text-black">HIGH END SHOP<br>HIGH END SERVICES</h2>
@@ -217,7 +169,7 @@
                             <div class="bg-white dark:bg-zinc-800 shadow rounded-lg p-6 flex flex-col justify-between">
                                 <div>
                                     <h3 class="text-lg font-medium text-zinc-900 dark:text-white">THE VIP PACKAGE</h3>
-                                    <p class="mt-2 text-2xl font-extrabold text-zinc-900 dark:text-white">$85</p>
+                                    <p class="mt-2 text-2xl font-extrabold text-zinc-900 dark:text-white">$80</p>
                                     <p class="mt-2 text-zinc-600 dark:text-zinc-300">Haircut, beard, shampoo, conditioner, dry, & style. Add a hot towel infused with botanical extracts for $5.</p>
                                 </div>
                                 <button onclick="toggleModal(true, 'appointmentModal')" class="mt-4 w-full bg-black text-white py-2 rounded">Select</button>
@@ -225,7 +177,7 @@
                             <div class="bg-white dark:bg-zinc-800 shadow rounded-lg p-6 flex flex-col justify-between">
                                 <div>
                                     <h3 class="text-lg font-medium text-zinc-900 dark:text-white">THE BEARD</h3>
-                                    <p class="mt-2 text-2xl font-extrabold text-zinc-900 dark:text-white">$25-40</p>
+                                    <p class="mt-2 text-2xl font-extrabold text-zinc-900 dark:text-white">$30</p>
                                     <p class="mt-2 text-zinc-600 dark:text-zinc-300">Trim, shape, and line up. Clipper, scissor, and straight blade. Add a hot towel infused with botanical extracts for $5.</p>
                                 </div>
                                 <button onclick="toggleModal(true, 'appointmentModal')" class="mt-4 w-full bg-black text-white py-2 rounded">Select</button>
@@ -282,80 +234,96 @@
                 </div>
             </section>
 
-            <section class="flex flex-col lg:flex-row justify-between items-start p-8 space-y-8 lg:space-y-0 lg:space-x-8 scroll-offset bg-black" id="contact-us">
-                <div class="flex-1">
-                    <div class="bg-zinc-100 flex items-center justify-center h-96 mb-4">
-                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2795.984199685986!2d-75.69518508444453!3d45.42310687910014!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4cce050f09420d11%3A0x22b7dcd6c240ff25!2sUniversity%20of%20Ottawa!5e0!3m2!1sen!2sca!4v1628964147377!5m2!1sen!2sca" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
-                    </div>
-                    <div>
-                        <h2 class="text-2xl font-bold mb-2 text-white">Visit Us</h2>
-                        <p class="text-white">123 Street ave<br>Ottawa, ON</p>
-                        <p class="mt-2 text-white">Hours:<br>Monday–Saturday<br>8am–8pm</p>
-                        <p class="mt-2 text-white">Phone:<br>(012) 345-6789</p>
-                    </div>
-                </div>
-                <div class="flex-1">
-                    <h2 class="text-4xl font-extrabold mb-6 text-white">Contact us</h2>
-                    <p class="text-zinc-300 mb-4">Contact Us and we'll get back to you as soon as possible</p>
-                    <form class="space-y-4" onsubmit="showContactConfirmation(event)">
-                        <div class="flex space-x-4">
-                            <div class="flex-1">
-                                <label for="first-name" class="block text-sm font-medium text-zinc-300">First name</label>
-                                <input type="text" id="first-name" name="first-name" class="mt-1 block w-full border border-zinc-300 rounded-md p-2" placeholder="Jane">
-                            </div>
-                            <div class="flex-1">
-                                <label for="last-name" class="block text-sm font-medium text-zinc-300">Last name</label>
-                                <input type="text" id="last-name" name="last-name" class="mt-1 block w-full border border-zinc-300 rounded-md p-2" placeholder="Smitherton">
-                            </div>
+            <section class="bg-zinc-900 py-12 w-full scroll-offset" id="contact-us">
+                <div class="flex flex-col lg:flex-row justify-between items-start p-8 space-y-8 lg:space-y-0 lg:space-x-8 scroll-offset">
+                    <div class="flex-1">
+                        <div class="flex items-center justify-center h-96 mb-4">
+                            <iframe 
+                                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2795.984199685986!2d-75.69518508444453!3d45.42310687910014!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4cce050f09420d11%3A0x22b7dcd6c240ff25!2sUniversity%20of%20Ottawa!5e0!3m2!1sen!2sca!4v1628964147377!5m2!1sen!2sca" 
+                                width="100%" 
+                                height="100%" 
+                                style="border:0;" 
+                                allowfullscreen="" 
+                                loading="lazy">
+                            </iframe>
                         </div>
                         <div>
-                            <label for="email" class="block text-sm font-medium text-zinc-300">Email address</label>
-                            <input type="email" id="email" name="email" class="mt-1 block w-full border border-zinc-300 rounded-md p-2" placeholder="email@janesfakedomain.net">
+                            <h2 class="text-2xl font-bold mb-2 text-white">Visit Us</h2>
+                            <p class="text-white">123 Street ave<br>Ottawa, ON</p>
+                            <p class="mt-2 text-white">Hours:<br>Monday–Saturday<br>8am–8pm</p>
+                            <p class="mt-2 text-white">Phone:<br>(123) 456-7890</p>
                         </div>
-                        <div>
-                            <label for="message" class="block text-sm font-medium text-zinc-300">Your message</label>
-                            <textarea id="message" name="message" rows="4" class="mt-1 block w-full border border-zinc-300 rounded-md p-2" placeholder="Enter your question or message"></textarea>
-                        </div>
-                        <button type="submit" class="w-full bg-white text-black p-2 rounded-md">Submit</button>
-                    </form>
+                    </div>
+                    <div class="flex-1">
+                        <h2 class="text-4xl font-extrabold mb-6 text-white">Contact us</h2>
+                        <p class="text-white font-extrabold mb-4">Contact Us and we'll get back to you as soon as possible</p>
+                        <form class="space-y-4">
+                            <div class="flex space-x-4">
+                                <div class="flex-1">
+                                    <label for="first-name" class="block text-sm font-medium text-white">First name</label>
+                                    <input type="text" id="first-name" name="first-name" class="mt-1 block w-full border border-zinc-300 rounded-md p-2" placeholder="Jane">
+                                </div>
+                                <div class="flex-1">
+                                    <label for="last-name" class="block text-sm font-medium text-white">Last name</label>
+                                    <input type="text" id="last-name" name="last-name" class="mt-1 block w-full border border-zinc-300 rounded-md p-2" placeholder="Smitherton">
+                                </div>
+                            </div>
+                            <div>
+                                <label for="email" class="block text-sm font-medium text-white">Email address</label>
+                                <input type="email" id="email" name="email" class="mt-1 block w-full border border-zinc-300 rounded-md p-2" placeholder="email@janesfakedomain.net">
+                            </div>
+                            <div>
+                                <label for="message" class="block text-sm font-medium text-white">Your message</label>
+                                <textarea id="message" name="message" rows="4" class="mt-1 block w-full border border-zinc-300 rounded-md p-2" placeholder="Enter your question or message"></textarea>
+                            </div>
+                            <button type="button" onclick="showContactConfirmation()" class="w-full bg-black text-white p-2 rounded-md">Submit</button>
+                        </form>
+                    </div>
                 </div>
             </section>
         </main>
     </div>
 
     <!-- Appointment Modal -->
-    <div id="appointmentModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden modal">
+    <div id="appointmentModal" class="fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center hidden modal">
         <div class="bg-black dark:bg-zinc-800 shadow-md rounded-lg p-8 max-w-4xl w-full">
-            <h1 class="text-3xl font-bold text-center mb-8 text-white">Book An Appointment</h1>
+            <h1 class="text-3xl font-bold text-center mb-8 text-zinc-100">Book An Appointment</h1>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
                 <div>
-                    <h2 class="text-xl font-semibold mb-4 text-white">Pick your NOSTYLIST</h2>
+                    <h2 class="text-xl font-semibold mb-4 text-zinc-100">Pick your NOSTYLIST</h2>
                     <div class="grid grid-cols-2 gap-4 mb-8">
-                        <div class="relative">
-                            <img src="frizzy.jpg" alt="Frizzy" class="w-full h-32 object-cover border border-zinc-300 dark:border-zinc-700 rounded cursor-pointer"
-                                onclick="selectStylist(this, 'Frizzy')">
-                            <div class="team-info">Frizzy - Barber</div>
+                        <div class="relative team-member cursor-pointer" onclick="selectStylist(this)">
+                            <img src="frizzy.jpg" alt="Frizzy" class="w-full h-32 object-cover border border-zinc-300 dark:border-zinc-700">
+                            <div class="team-info absolute inset-0 flex flex-col justify-center items-center bg-black bg-opacity-75 text-white">
+                                <p>Frizzy</p>
+                                <p>Barber</p>
+                            </div>
                         </div>
-                        <div class="relative">
-                            <img src="image.jpg" alt="Nino" class="w-full h-32 object-cover border border-zinc-300 dark:border-zinc-700 rounded cursor-pointer"
-                                onclick="selectStylist(this, 'Nino')">
-                            <div class="team-info">Nino - Barber</div>
+                        <div class="relative team-member cursor-pointer" onclick="selectStylist(this)">
+                            <img src="image.jpg" alt="Nino" class="w-full h-32 object-cover border border-zinc-300 dark:border-zinc-700">
+                            <div class="team-info absolute inset-0 flex flex-col justify-center items-center bg-black bg-opacity-75 text-white">
+                                <p>Nino</p>
+                                <p>Barber</p>
+                            </div>
                         </div>
-                        <div class="relative">
-                            <img src="sa.jpg" alt="S.A" class="w-full h-32 object-cover border border-zinc-300 dark:border-zinc-700 rounded cursor-pointer"
-                                onclick="selectStylist(this, 'S.A')">
-                            <div class="team-info">S.A - Barber</div>
+                        <div class="relative team-member cursor-pointer" onclick="selectStylist(this)">
+                            <img src="sa.jpg" alt="S.A" class="w-full h-32 object-cover border border-zinc-300 dark:border-zinc-700">
+                            <div class="team-info absolute inset-0 flex flex-col justify-center items-center bg-black bg-opacity-75 text-white">
+                                <p>S.A</p>
+                                <p>Barber</p>
+                            </div>
                         </div>
-                        <div class="relative">
-                            <img src="me.jpg" alt="Turner" class="w-full h-32 object-cover border border-zinc-300 dark:border-zinc-700 rounded cursor-pointer"
-                                onclick="selectStylist(this, 'Turner')">
-                            <div class="team-info">Turner - Hairstylist</div>
+                        <div class="relative team-member cursor-pointer" onclick="selectStylist(this)">
+                            <img src="me.jpg" alt="Turner" class="w-full h-32 object-cover border border-zinc-300 dark:border-zinc-700">
+                            <div class="team-info absolute inset-0 flex flex-col justify-center items-center bg-black bg-opacity-75 text-white">
+                                <p>Turner</p>
+                                <p>Hairstylist</p>
+                            </div>
                         </div>
                     </div>
                     <div class="mb-8">
-                        <label class="block text-white mb-2">Choose a service</label>
+                        <label class="block text-zinc-100 mb-2">Choose a service</label>
                         <select class="w-full p-2 border border-zinc-300 dark:border-zinc-700 rounded-lg">
-                            <option>Choose your style</option>
                             <option>THE HAIRCUT</option>
                             <option>THE HAIRCUT+BEARD</option>
                             <option>THE VIP PACKAGE</option>
@@ -366,60 +334,55 @@
                     </div>
                 </div>
                 <div>
-                    <h2 class="text-xl font-semibold mb-4 text-white">Your information</h2>
-                    <input type="text" placeholder="Enter Full Name" class="w-full p-2 mb-4 border border-zinc-300 dark:border-zinc-700 rounded-lg">
-                    <input type="email" placeholder="Enter Email" class="w-full p-2 mb-8 border border-zinc-300 dark:border-zinc-700 rounded-lg">
-                    <h2 class="text-xl font-semibold mb-4 text-white">Pick Date and Time</h2>
-                    <div class="bg-zinc-200 dark:bg-zinc-700 p-4 rounded-lg mb-8">
-                        <input type="text" id="datepicker" class="w-full p-2 mb-4 border border-zinc-300 dark:border-zinc-700 rounded-lg"
-                            placeholder="Select Date">
-                        <input type="text" id="timepicker" class="w-full p-2 border border-zinc-300 dark:border-zinc-700 rounded-lg"
-                            placeholder="Select Time">
-                    </div>
+                    <h2 class="text-xl font-semibold mb-4 text-zinc-100">Your information</h2>
+                    <input type="text" id="fullName" placeholder="Enter Full Name" class="w-full p-2 mb-4 border border-zinc-300 dark:border-zinc-700 rounded-lg">
+                    <input type="email" id="email" placeholder="Enter Email" class="w-full p-2 mb-8 border border-zinc-300 dark:border-zinc-700 rounded-lg">
+                    <h2 class="text-xl font-semibold mb-4 text-zinc-100">Pick Date and Time</h2>
+                    <input type="text" id="datetimepicker" class="w-full p-2 mb-8 border border-zinc-300 dark:border-zinc-700 rounded-lg" placeholder="Select Date and Time">
                 </div>
             </div>
             <div class="text-center">
                 <button onclick="showConfirmation()" class="bg-white text-black px-6 py-2 rounded-lg">Book Appointment</button>
-                <button onclick="toggleModal(false, 'appointmentModal')" class="mt-4 bg-red-500 text-white px-4 py-2 rounded-lg">Close</button>
+                <button onclick="toggleModal(false, 'appointmentModal')" class="mt-4 bg-white text-black px-4 py-2 rounded-lg">Close</button>
             </div>
         </div>
     </div>
 
     <!-- Confirmation Modal -->
-    <div id="confirmationModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden modal">
-        <div class="bg-white dark:bg-zinc-800 shadow-md rounded-lg p-8 max-w-4xl w-full">
+    <div id="confirmationModal" class="fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center hidden modal">
+        <div class="bg-black dark:bg-zinc-100 shadow-md rounded-lg p-8 max-w-4xl w-full">
             <div class="text-center">
-                <h1 class="text-3xl font-bold mb-4">Booking Confirmed</h1>
-                <p class="mb-6">Your appointment request has been received. Check your email for the confirmation receipt!</p>
+                <h1 class="text-3xl font-extrabold mb-4 text-black">Booking Confirmed</h1>
+                <p class="font-bold mb-6 text-black">Your appointment request has been received. Check your email for the confirmation receipt!</p>
                 <div class="text-left mb-6">
-                    <p class="font-semibold">Booking Details:</p>
-                    <div class="flex flex-wrap justify-between">
-                        <p>Booking Number: XXXXXX</p>
-                        <p>Service Selected: AAAAAA</p>
+                    <p class="font-bold text-white">Booking Details:</p>
+                    <div class="font-bold flex flex-wrap justify-between text-black">
+                        <p>Booking Number: <span id="bookingNumber"></span></p>
+                        <p>Service Selected: <span id="selectedService"></span></p>
                     </div>
-                    <div class="flex flex-wrap justify-between">
-                        <p>Date and Time: DD/MM/YYYY - HH:MM</p>
-                        <p>NOSTYLIST Selected: AAAAA</p>
+                    <div class="font-bold flex flex-wrap justify-between text-black">
+                        <p>Date and Time: <span id="selectedDateTime"></span></p>
+                        <p>NOSTYLIST Selected: <span id="selectedStylist"></span></p>
                     </div>
                 </div>
                 <button onclick="toggleModal(false, 'confirmationModal')" class="bg-black text-white py-2 px-4 rounded">HOME</button>
             </div>
             <footer class="mt-8 w-full text-center border-t pt-4">
-                <p class="font-bold">NOSTYLIST</p>
+                <p class="font-bold text-black">NOSTYLIST</p>
                 <div class="flex justify-center space-x-4 mt-2">
-                    <a href="#"><img aria-hidden="true" alt="facebook" src="facebook.png" /></a>
-                    <a href="#"><img aria-hidden="true" alt="instagram" src="ig.png" /></a>
+                    <a href="#"><img aria-hidden="true" alt="facebook" src="facebook.png" class="w-6 h-6"/></a>
+                    <a href="#"><img aria-hidden="true" alt="instagram" src="ig.png" class="w-6 h-6"/></a>
                 </div>
             </footer>
         </div>
     </div>
 
     <!-- Contact Confirmation Modal -->
-    <div id="contactConfirmationModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden modal">
-        <div class="bg-white dark:bg-zinc-800 shadow-md rounded-lg p-8 max-w-4xl w-full">
+    <div id="contactConfirmationModal" class="fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center hidden modal">
+        <div class="bg-black dark:bg-zinc-100 shadow-md rounded-lg p-8 max-w-4xl w-full">
             <div class="text-center">
-                <h1 class="text-3xl font-bold mb-4">Thank You</h1>
-                <p class="mb-6">Thank you for contacting us. We'll get back to you shortly!</p>
+                <h1 class="text-3xl font-extrabold mb-4 text-black">Thank You!</h1>
+                <p class="font-bold mb-6 text-Black">Thank you for contacting us. We will get back to you shortly.</p>
                 <button onclick="toggleModal(false, 'contactConfirmationModal')" class="bg-black text-white py-2 px-4 rounded">Close</button>
             </div>
         </div>
@@ -429,15 +392,16 @@
     <script>
         function toggleModal(show, modalId) {
             const modal = document.getElementById(modalId);
+            const body = document.body;
             if (show) {
                 modal.classList.remove('hidden');
-                document.body.classList.add('modal-open');
+                body.classList.add('modal-open');
                 setTimeout(() => {
                     modal.classList.remove('opacity-0');
                 }, 10);
             } else {
                 modal.classList.add('opacity-0');
-                document.body.classList.remove('modal-open');
+                body.classList.remove('modal-open');
                 setTimeout(() => {
                     modal.classList.add('hidden');
                 }, 300);
@@ -445,37 +409,33 @@
         }
 
         function showConfirmation() {
+            // Get the input values
+            const fullName = document.getElementById('fullName').value;
+            const email = document.getElementById('email').value;
+            const dateTime = document.getElementById('datetimepicker').value;
+            const service = document.querySelector('select').value;
+            const stylist = document.querySelector('.team-member.selected .team-info p:first-child').textContent;
+            
+            // Generate a 6 character booking number
+            const bookingNumber = Math.floor(100000 + Math.random() * 900000).toString();
+
+            // Set the confirmation modal values
+            document.getElementById('selectedStylist').textContent = stylist;
+            document.getElementById('selectedService').textContent = service;
+            document.getElementById('selectedDateTime').textContent = dateTime;
+            document.getElementById('bookingNumber').textContent = bookingNumber;
+
+            // Close appointment modal and show confirmation modal
             toggleModal(false, 'appointmentModal');
             toggleModal(true, 'confirmationModal');
         }
 
-        function showContactConfirmation(event) {
-            event.preventDefault();
+        function showContactConfirmation() {
             toggleModal(true, 'contactConfirmationModal');
         }
 
-        function selectStylist(element, name) {
-            document.querySelectorAll('.selected').forEach(img => {
-                img.classList.remove('selected');
-            });
-            element.classList.add('selected');
-        }
-
-        flatpickr("#datepicker", {
-            enableTime: false,
-            dateFormat: "Y-m-d",
-            theme: "dark"
-        });
-
-        flatpickr("#timepicker", {
-            enableTime: true,
-            noCalendar: true,
-            dateFormat: "H:i",
-            theme: "dark"
-        });
-
         // Handle header transparency on scroll
-        window.addEventListener('scroll', function () {
+        window.addEventListener('scroll', function() {
             const header = document.getElementById('header');
             if (window.scrollY > 50) {
                 header.classList.add('scrolled-header');
@@ -483,7 +443,22 @@
                 header.classList.remove('scrolled-header');
             }
         });
+
+        function selectStylist(element) {
+            const teamMembers = document.querySelectorAll('.team-member');
+            teamMembers.forEach(member => {
+                member.classList.remove('selected');
+            });
+            element.classList.add('selected');
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            flatpickr("#datetimepicker", {
+                enableTime: true,
+                dateFormat: "Y-m-d H:i",
+                minDate: "today"
+            });
+        });
     </script>
 </body>
-
 </html>
