@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,9 +10,11 @@
         html {
             scroll-behavior: smooth;
         }
+
         .modal {
             transition: opacity 0.3s ease;
         }
+
         .bg-animation {
             position: fixed;
             top: 0;
@@ -21,45 +24,117 @@
             z-index: -1;
             overflow: hidden;
         }
+
         .circle {
             position: absolute;
             border-radius: 50%;
             opacity: 0.5;
             animation: move 40s linear infinite;
         }
+
         .circle.black {
             background-color: black;
         }
+
         .circle.white {
             background-color: rgb(74, 63, 63);
         }
+
         @keyframes move {
             0% {
                 transform: translate(0, 0);
             }
+
             25% {
                 transform: translate(50vw, 50vh);
             }
+
             50% {
                 transform: translate(-50vw, 50vh);
             }
+
             75% {
                 transform: translate(50vw, -50vh);
             }
+
             100% {
                 transform: translate(0, 0);
             }
         }
+
         .nav-link {
             font-weight: bold;
             color: black;
             padding: 0.5rem 1rem;
         }
+
         .nav-link:hover {
             color: gray;
         }
+
+        .fixed-header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: rgba(255, 255, 255, 0.8);
+            /* Light background with opacity */
+            z-index: 1000;
+            transition: background-color 0.3s ease;
+        }
+
+        .scrolled-header {
+            background-color: rgba(255, 255, 255, 0.9);
+            /* Slightly darker background when scrolled */
+        }
+
+        .scroll-offset {
+            scroll-margin-top: 100px;
+            /* Adjust this value according to the header height */
+        }
+
+        .modal-open {
+            overflow: hidden;
+        }
+
+        .modal-open .modal {
+            background-color: black;
+        }
+
+        .modal-open .modal button {
+            background-color: white;
+            color: black;
+        }
+
+        .modal-open .modal select {
+            font-family: 'Arial', sans-serif;
+            font-size: 1rem;
+        }
+
+        .team-member:hover .team-info {
+            display: block;
+        }
+
+        .team-info {
+            display: none;
+            position: absolute;
+            bottom: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: rgba(0, 0, 0, 0.7);
+            color: white;
+            padding: 5px;
+            border-radius: 5px;
+            text-align: center;
+        }
+
+        .selected {
+            border: 3px solid white;
+        }
     </style>
+    <link href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css" rel="stylesheet">
 </head>
+
 <body class="relative">
     <div class="bg-animation">
         <div class="circle black" style="width: 150px; height: 150px; top: 10%; left: 10%;"></div>
@@ -70,23 +145,26 @@
     </div>
 
     <div class="flex flex-col items-center p-4">
-        <header class="w-full flex justify-between items-center py-4">
-            <div class="text-2xl font-extrabold">NOSTYLIST</div>
-            <nav class="flex space-x-4">
-                <a href="#about-us" class="nav-link">About Us</a>
-                <a href="#services" class="nav-link">Services</a>
-                <a href="#team" class="nav-link">Team</a>
-                <a href="#contact-us" class="nav-link">Contact Us</a>
-                <button onclick="toggleModal(true, 'appointmentModal')" class="bg-black text-white px-4 py-2 rounded">Book Now</button>
-            </nav>
+        <header id="header" class="fixed-header py-4">
+            <div class="w-full flex justify-between items-center">
+                <div class="text-2xl font-extrabold">NOSTYLIST</div>
+                <nav class="flex space-x-4">
+                    <a href="#about-us" class="nav-link">About Us</a>
+                    <a href="#services" class="nav-link">Services</a>
+                    <a href="#team" class="nav-link">Team</a>
+                    <a href="#contact-us" class="nav-link">Contact Us</a>
+                    <button onclick="toggleModal(true, 'appointmentModal')" class="bg-black text-white px-4 py-2 rounded">Book Now</button>
+                </nav>
+            </div>
         </header>
-        <main class="w-full max-w-6xl">
+        <main class="w-full max-w-6xl mt-16">
+            <!-- Added top margin to offset fixed header -->
             <section class="text-center py-8" id="home">
                 <h1 class="text-5xl font-extrabold">NOSTYLIST</h1>
                 <p class="text-zinc-500">Sharp Styles, Simplified</p>
             </section>
-            
-            <section class="grid grid-cols-1 md:grid-cols-2 gap-8 py-8" id="about-us">
+
+            <section class="grid grid-cols-1 md:grid-cols-2 gap-8 py-8 scroll-offset" id="about-us">
                 <div class="p-4 flex items-center justify-center">
                     <img src="aboutus1.jpeg" class="rounded-lg">
                 </div>
@@ -100,8 +178,8 @@
                     </p>
                 </div>
             </section>
-            
-            <section class="grid grid-cols-1 md:grid-cols-2 gap-8 py-8">
+
+            <section class="grid grid-cols-1 md:grid-cols-2 gap-8 py-8 scroll-offset">
                 <div class="p-4 flex items-center justify-center">
                     <h2 class="text-5xl font-bold text-center text-black">HIGH END SHOP<br>HIGH END SERVICES</h2>
                 </div>
@@ -110,141 +188,135 @@
                 </div>
             </section>
 
+            <section class="bg-white dark:bg-zinc-900 py-12 w-full scroll-offset" id="services">
+                <div class="w-full px-4 sm:px-6 lg:px-8">
+                    <div class="text-center">
+                        <h2 class="text-3xl font-extrabold text-zinc-900 dark:text-white">Services</h2>
+                        <p class="mt-4 text-lg leading-6 text-zinc-600 dark:text-zinc-300">
+                            At Dep we offer a range of services that allow us to provide you with a premium hair experience, regardless of what it is you might be looking for. We take pride in staffing an extremely talented and diverse team to ensure we can work with all hair types.
+                        </p>
+                    </div>
+                    <div class="mt-10">
+                        <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+                            <div class="bg-white dark:bg-zinc-800 shadow rounded-lg p-6 flex flex-col justify-between">
+                                <div>
+                                    <h3 class="text-lg font-medium text-zinc-900 dark:text-white">THE HAIRCUT</h3>
+                                    <p class="mt-2 text-2xl font-extrabold text-zinc-900 dark:text-white">$XX</p>
+                                    <p class="mt-2 text-zinc-600 dark:text-zinc-300">Fade, taper, side part, undercut, buzz, etc. customized to your face and head shape. Hair line clean up. Clipper, scissor, and/or straight blade.</p>
+                                </div>
+                                <button onclick="toggleModal(true, 'appointmentModal')" class="mt-4 w-full bg-black text-white py-2 rounded">Select</button>
+                            </div>
+                            <div class="bg-white dark:bg-zinc-800 shadow rounded-lg p-6 flex flex-col justify-between">
+                                <div>
+                                    <h3 class="text-lg font-medium text-zinc-900 dark:text-white">THE HAIRCUT+BEARD</h3>
+                                    <p class="mt-2 text-2xl font-extrabold text-zinc-900 dark:text-white">$XX</p>
+                                    <p class="mt-2 text-zinc-600 dark:text-zinc-300">Add a hot towel infused with botanical extracts for $5.</p>
+                                </div>
+                                <button onclick="toggleModal(true, 'appointmentModal')" class="mt-4 w-full bg-black text-white py-2 rounded">Select</button>
+                            </div>
+                            <div class="bg-white dark:bg-zinc-800 shadow rounded-lg p-6 flex flex-col justify-between">
+                                <div>
+                                    <h3 class="text-lg font-medium text-zinc-900 dark:text-white">THE VIP PACKAGE</h3>
+                                    <p class="mt-2 text-2xl font-extrabold text-zinc-900 dark:text-white">$XX</p>
+                                    <p class="mt-2 text-zinc-600 dark:text-zinc-300">Haircut, beard, shampoo, conditioner, dry, & style. Add a hot towel infused with botanical extracts for $5.</p>
+                                </div>
+                                <button onclick="toggleModal(true, 'appointmentModal')" class="mt-4 w-full bg-black text-white py-2 rounded">Select</button>
+                            </div>
+                            <div class="bg-white dark:bg-zinc-800 shadow rounded-lg p-6 flex flex-col justify-between">
+                                <div>
+                                    <h3 class="text-lg font-medium text-zinc-900 dark:text-white">THE BEARD</h3>
+                                    <p class="mt-2 text-2xl font-extrabold text-zinc-900 dark:text-white">$XX</p>
+                                    <p class="mt-2 text-zinc-600 dark:text-zinc-300">Trim, shape, and line up. Clipper, scissor, and straight blade. Add a hot towel infused with botanical extracts for $5.</p>
+                                </div>
+                                <button onclick="toggleModal(true, 'appointmentModal')" class="mt-4 w-full bg-black text-white py-2 rounded">Select</button>
+                            </div>
+                            <div class="bg-white dark:bg-zinc-800 shadow rounded-lg p-6 flex flex-col justify-between">
+                                <div>
+                                    <h3 class="text-lg font-medium text-zinc-900 dark:text-white">PERM</h3>
+                                    <p class="mt-2 text-2xl font-extrabold text-zinc-900 dark:text-white">$XX</p>
+                                    <p class="mt-2 text-zinc-600 dark:text-zinc-300">Perm service delivers expert hair perms for personalized, lasting curls with a focus on hair health.</p>
+                                </div>
+                                <button onclick="toggleModal(true, 'appointmentModal')" class="mt-4 w-full bg-black text-white py-2 rounded">Select</button>
+                            </div>
+                            <div class="bg-white dark:bg-zinc-800 shadow rounded-lg p-6 flex flex-col justify-between">
+                                <div>
+                                    <h3 class="text-lg font-medium text-zinc-900 dark:text-white">THE HOT TOWEL SHAVE</h3>
+                                    <p class="mt-2 text-2xl font-extrabold text-zinc-900 dark:text-white">$XX</p>
+                                    <p class="mt-2 text-zinc-600 dark:text-zinc-300">If you know, you know. Steamed towel infused with botanical extracts. Straight razor.</p>
+                                </div>
+                                <button onclick="toggleModal(true, 'appointmentModal')" class="mt-4 w-full bg-black text-white py-2 rounded">Select</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
 
-
-            <section class="bg-white dark:bg-zinc-900 py-12 w-full" id="services">
-              <div class="w-full px-4 sm:px-6 lg:px-8">
-                  <div class="text-center">
-                      <h2 class="text-3xl font-extrabold text-zinc-900 dark:text-white">Services</h2>
-                      <p class="mt-4 text-lg leading-6 text-zinc-600 dark:text-zinc-300">
-                          At Dep we offer a range of services that allow us to provide you with a premium hair experience, regardless of what it is you might be looking for. We take pride in staffing an extremely talented and diverse team to ensure we can work with all hair types.
-                      </p>
-                  </div>
-                  <div class="mt-10">
-                      <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
-                          <div class="bg-white dark:bg-zinc-800 shadow rounded-lg p-6 flex flex-col justify-between">
-                              <div>
-                                  <h3 class="text-lg font-medium text-zinc-900 dark:text-white">THE HAIRCUT</h3>
-                                  <p class="mt-2 text-2xl font-extrabold text-zinc-900 dark:text-white">$XX</p>
-                                  <p class="mt-2 text-zinc-600 dark:text-zinc-300">Fade, taper, side part, undercut, buzz, etc. customized to your face and head shape. Hair line clean up. Clipper, scissor, and/or straight blade.</p>
-                              </div>
-                              <button onclick="toggleModal(true, 'appointmentModal')" class="mt-4 w-full bg-black text-white py-2 rounded">Select</button>
-                          </div>
-                          <div class="bg-white dark:bg-zinc-800 shadow rounded-lg p-6 flex flex-col justify-between">
-                              <div>
-                                  <h3 class="text-lg font-medium text-zinc-900 dark:text-white">THE HAIRCUT+BEARD</h3>
-                                  <p class="mt-2 text-2xl font-extrabold text-zinc-900 dark:text-white">$XX</p>
-                                  <p class="mt-2 text-zinc-600 dark:text-zinc-300">Add a hot towel infused with botanical extracts for $5.</p>
-                              </div>
-                              <button onclick="toggleModal(true, 'appointmentModal')" class="mt-4 w-full bg-black text-white py-2 rounded">Select</button>
-                          </div>
-                          <div class="bg-white dark:bg-zinc-800 shadow rounded-lg p-6 flex flex-col justify-between">
-                              <div>
-                                  <h3 class="text-lg font-medium text-zinc-900 dark:text-white">THE VIP PACKAGE</h3>
-                                  <p class="mt-2 text-2xl font-extrabold text-zinc-900 dark:text-white">$XX</p>
-                                  <p class="mt-2 text-zinc-600 dark:text-zinc-300">Haircut, beard, shampoo, conditioner, dry, & style. Add a hot towel infused with botanical extracts for $5.</p>
-                              </div>
-                              <button onclick="toggleModal(true, 'appointmentModal')" class="mt-4 w-full bg-black text-white py-2 rounded">Select</button>
-                          </div>
-                          <div class="bg-white dark:bg-zinc-800 shadow rounded-lg p-6 flex flex-col justify-between">
-                              <div>
-                                  <h3 class="text-lg font-medium text-zinc-900 dark:text-white">THE BEARD</h3>
-                                  <p class="mt-2 text-2xl font-extrabold text-zinc-900 dark:text-white">$XX</p>
-                                  <p class="mt-2 text-zinc-600 dark:text-zinc-300">Trim, shape, and line up. Clipper, scissor, and straight blade. Add a hot towel infused with botanical extracts for $5.</p>
-                              </div>
-                              <button onclick="toggleModal(true, 'appointmentModal')" class="mt-4 w-full bg-black text-white py-2 rounded">Select</button>
-                          </div>
-                          <div class="bg-white dark:bg-zinc-800 shadow rounded-lg p-6 flex flex-col justify-between">
-                              <div>
-                                  <h3 class="text-lg font-medium text-zinc-900 dark:text-white">PERM</h3>
-                                  <p class="mt-2 text-2xl font-extrabold text-zinc-900 dark:text-white">$XX</p>
-                                  <p class="mt-2 text-zinc-600 dark:text-zinc-300">Perm service delivers expert hair perms for personalized, lasting curls with a focus on hair health.</p>
-                              </div>
-                              <button onclick="toggleModal(true, 'appointmentModal')" class="mt-4 w-full bg-black text-white py-2 rounded">Select</button>
-                          </div>
-                          <div class="bg-white dark:bg-zinc-800 shadow rounded-lg p-6 flex flex-col justify-between">
-                              <div>
-                                  <h3 class="text-lg font-medium text-zinc-900 dark:text-white">THE HOT TOWEL SHAVE</h3>
-                                  <p class="mt-2 text-2xl font-extrabold text-zinc-900 dark:text-white">$XX</p>
-                                  <p class="mt-2 text-zinc-600 dark:text-zinc-300">If you know, you know. Steamed towel infused with botanical extracts. Straight razor.</p>
-                              </div>
-                              <button onclick="toggleModal(true, 'appointmentModal')" class="mt-4 w-full bg-black text-white py-2 rounded">Select</button>
-                          </div>
-                      </div>
-                  </div>
-              </div>
-          </section>
-
-
-
-
-
-            <section class="max-w-6xl mx-auto p-6" id="team">
-                <div class="text-center mb-8">
-                    <h2 class="text-3xl font-bold">Meet The Team</h2>
-                    <p class="text-zinc-600 dark:text-zinc-400 mt-2">
+            <section class="max-w-6xl mx-auto p-6 scroll-offset" id="team">
+                <div class="text-center mb-11">
+                    <h2 class="text-3xl font-extrabold">Meet The Team</h2>
+                    <p class="text-zinc-600 dark:text-zinc-400 mt-6">
                         Welcome to NOSTYLIST, where our skilled team of barbers and hairstylists is dedicated to providing precision cuts and personalized grooming experiences.
                     </p>
                 </div>
                 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-6">
                     <div class="bg-zinc-100 dark:bg-zinc-800 p-4 rounded-lg text-center">
-                        <img src="https://placehold.co/300x200" alt="Team Member 1" class="w-full h-48 object-cover rounded-lg mb-4">
-                        <h3 class="font-semibold">Barber</h3>
-                        <p class="text-zinc-600 dark:text-zinc-400">Description of your first project</p>
+                        <img src="frizzy.jpg" alt="Frizzy" class="rounded-lg mb-4">
+                        <h3 class="font-semibold text-xl text-white">Barber</h3>
+                        <p class="text-2xl font-bold text-white">Frizzy</p>
                     </div>
                     <div class="bg-zinc-100 dark:bg-zinc-800 p-4 rounded-lg text-center">
-                        <img src="https://placehold.co/300x200" alt="Team Member 2" class="w-full h-48 object-cover rounded-lg mb-4">
-                        <h3 class="font-semibold">Barber</h3>
-                        <p class="text-zinc-600 dark:text-zinc-400">Description of your second work</p>
+                        <img src="image.jpg" alt="Nino" class="rounded-lg mb-4">
+                        <h3 class="font-semibold text-xl text-white">Barber</h3>
+                        <p class="text-2xl font-bold text-white">Nino</p>
                     </div>
                     <div class="bg-zinc-100 dark:bg-zinc-800 p-4 rounded-lg text-center">
-                        <img src="https://placehold.co/300x200" alt="Team Member 3" class="w-full h-48 object-cover rounded-lg mb-4">
-                        <h3 class="font-semibold">Barber</h3>
-                        <p class="text-zinc-600 dark:text-zinc-400">Description of your third creation</p>
+                        <img src="sa.jpg" alt="S.A" class="rounded-lg mb-4">
+                        <h3 class="font-semibold text-xl text-white">Barber</h3>
+                        <p class="text-2xl font-bold text-white">S.A</p>
                     </div>
                     <div class="bg-zinc-100 dark:bg-zinc-800 p-4 rounded-lg text-center">
-                        <img src="https://placehold.co/300x200" alt="Team Member 4" class="w-full h-48 object-cover rounded-lg mb-4">
-                        <h3 class="font-semibold">Hairstylist</h3>
-                        <p class="text-zinc-600 dark:text-zinc-400">Description of your fourth endeavor</p>
+                        <img src="me.jpg" alt="Turner" class="rounded-lg mb-4">
+                        <h3 class="font-semibold text-xl text-white">Hairstylist</h3>
+                        <p class="text-2xl font-bold text-white">Turner</p>
                     </div>
                 </div>
             </section>
 
-            <section class="flex flex-col lg:flex-row justify-between items-start p-4 space-y-8 lg:space-y-0 lg:space-x-8" id="contact-us">
+            <section class="flex flex-col lg:flex-row justify-between items-start p-8 space-y-8 lg:space-y-0 lg:space-x-8 scroll-offset bg-black" id="contact-us">
                 <div class="flex-1">
-                    <div class="bg-zinc-100 flex items-center justify-center h-48 mb-4">
-                        <span class="text-2xl text-zinc-500">[Insert Image Here]</span>
+                    <div class="bg-zinc-100 flex items-center justify-center h-96 mb-4">
+                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2795.984199685986!2d-75.69518508444453!3d45.42310687910014!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4cce050f09420d11%3A0x22b7dcd6c240ff25!2sUniversity%20of%20Ottawa!5e0!3m2!1sen!2sca!4v1628964147377!5m2!1sen!2sca" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
                     </div>
                     <div>
-                        <h2 class="text-2xl font-bold mb-2">Visit Us</h2>
-                        <p>123 Street ave<br>Ottawa, ON</p>
-                        <p class="mt-2">Hours:<br>Monday–Saturday<br>8am–8pm</p>
-                        <p class="mt-2">Phone:<br>(XXX) XXX-XXXX</p>
+                        <h2 class="text-2xl font-bold mb-2 text-white">Visit Us</h2>
+                        <p class="text-white">123 Street ave<br>Ottawa, ON</p>
+                        <p class="mt-2 text-white">Hours:<br>Monday–Saturday<br>8am–8pm</p>
+                        <p class="mt-2 text-white">Phone:<br>(XXX) XXX-XXXX</p>
                     </div>
                 </div>
                 <div class="flex-1">
-                    <h2 class="text-2xl font-bold mb-2">Contact us</h2>
-                    <p class="text-zinc-500 mb-4">Subheading for description or instructions</p>
-                    <form class="space-y-4">
+                    <h2 class="text-4xl font-extrabold mb-6 text-white">Contact us</h2>
+                    <p class="text-zinc-300 mb-4">Contact Us and we'll get back to you as soon as possible</p>
+                    <form class="space-y-4" onsubmit="showContactConfirmation(event)">
                         <div class="flex space-x-4">
                             <div class="flex-1">
-                                <label for="first-name" class="block text-sm font-medium text-zinc-700">First name</label>
+                                <label for="first-name" class="block text-sm font-medium text-zinc-300">First name</label>
                                 <input type="text" id="first-name" name="first-name" class="mt-1 block w-full border border-zinc-300 rounded-md p-2" placeholder="Jane">
                             </div>
                             <div class="flex-1">
-                                <label for="last-name" class="block text-sm font-medium text-zinc-700">Last name</label>
+                                <label for="last-name" class="block text-sm font-medium text-zinc-300">Last name</label>
                                 <input type="text" id="last-name" name="last-name" class="mt-1 block w-full border border-zinc-300 rounded-md p-2" placeholder="Smitherton">
                             </div>
                         </div>
                         <div>
-                            <label for="email" class="block text-sm font-medium text-zinc-700">Email address</label>
+                            <label for="email" class="block text-sm font-medium text-zinc-300">Email address</label>
                             <input type="email" id="email" name="email" class="mt-1 block w-full border border-zinc-300 rounded-md p-2" placeholder="email@janesfakedomain.net">
                         </div>
                         <div>
-                            <label for="message" class="block text-sm font-medium text-zinc-700">Your message</label>
+                            <label for="message" class="block text-sm font-medium text-zinc-300">Your message</label>
                             <textarea id="message" name="message" rows="4" class="mt-1 block w-full border border-zinc-300 rounded-md p-2" placeholder="Enter your question or message"></textarea>
                         </div>
-                        <button type="submit" class="w-full bg-black text-white p-2 rounded-md">Submit</button>
+                        <button type="submit" class="w-full bg-white text-black p-2 rounded-md">Submit</button>
                     </form>
                 </div>
             </section>
@@ -253,43 +325,61 @@
 
     <!-- Appointment Modal -->
     <div id="appointmentModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden modal">
-        <div class="bg-white dark:bg-zinc-800 shadow-md rounded-lg p-8 max-w-4xl w-full">
-            <h1 class="text-3xl font-bold text-center mb-8 text-zinc-900 dark:text-zinc-100">Book An Appointment</h1>
+        <div class="bg-black dark:bg-zinc-800 shadow-md rounded-lg p-8 max-w-4xl w-full">
+            <h1 class="text-3xl font-bold text-center mb-8 text-white">Book An Appointment</h1>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
                 <div>
-                    <h2 class="text-xl font-semibold mb-4 text-zinc-900 dark:text-zinc-100">Pick your NOSTYLIST</h2>
+                    <h2 class="text-xl font-semibold mb-4 text-white">Pick your NOSTYLIST</h2>
                     <div class="grid grid-cols-2 gap-4 mb-8">
-                        <img src="https://placehold.co/150" alt="Stylist 1" class="w-full h-32 object-cover border border-zinc-300 dark:border-zinc-700">
-                        <img src="https://placehold.co/150" alt="Stylist 2" class="w-full h-32 object-cover border border-zinc-300 dark:border-zinc-700">
-                        <img src="https://placehold.co/150" alt="Stylist 3" class="w-full h-32 object-cover border border-zinc-300 dark:border-zinc-700">
-                        <img src="https://placehold.co/150" alt="Stylist 4" class="w-full h-32 object-cover border border-zinc-300 dark:border-zinc-700">
+                        <div class="relative">
+                            <img src="frizzy.jpg" alt="Frizzy" class="w-full h-32 object-cover border border-zinc-300 dark:border-zinc-700 rounded cursor-pointer"
+                                onclick="selectStylist(this, 'Frizzy')">
+                            <div class="team-info">Frizzy - Barber</div>
+                        </div>
+                        <div class="relative">
+                            <img src="image.jpg" alt="Nino" class="w-full h-32 object-cover border border-zinc-300 dark:border-zinc-700 rounded cursor-pointer"
+                                onclick="selectStylist(this, 'Nino')">
+                            <div class="team-info">Nino - Barber</div>
+                        </div>
+                        <div class="relative">
+                            <img src="sa.jpg" alt="S.A" class="w-full h-32 object-cover border border-zinc-300 dark:border-zinc-700 rounded cursor-pointer"
+                                onclick="selectStylist(this, 'S.A')">
+                            <div class="team-info">S.A - Barber</div>
+                        </div>
+                        <div class="relative">
+                            <img src="me.jpg" alt="Turner" class="w-full h-32 object-cover border border-zinc-300 dark:border-zinc-700 rounded cursor-pointer"
+                                onclick="selectStylist(this, 'Turner')">
+                            <div class="team-info">Turner - Hairstylist</div>
+                        </div>
                     </div>
                     <div class="mb-8">
-                        <label class="block text-zinc-900 dark:text-zinc-100 mb-2">Choose a service</label>
+                        <label class="block text-white mb-2">Choose a service</label>
                         <select class="w-full p-2 border border-zinc-300 dark:border-zinc-700 rounded-lg">
                             <option>Choose your style</option>
-                            <option>Style 1</option>
-                            <option>Style 2</option>
-                            <option>Style 3</option>
+                            <option>THE HAIRCUT</option>
+                            <option>THE HAIRCUT+BEARD</option>
+                            <option>THE VIP PACKAGE</option>
+                            <option>THE BEARD</option>
+                            <option>PERM</option>
+                            <option>THE HOT TOWEL SHAVE</option>
                         </select>
                     </div>
                 </div>
                 <div>
-                    <h2 class="text-xl font-semibold mb-4 text-zinc-900 dark:text-zinc-100">Your information</h2>
+                    <h2 class="text-xl font-semibold mb-4 text-white">Your information</h2>
                     <input type="text" placeholder="Enter Full Name" class="w-full p-2 mb-4 border border-zinc-300 dark:border-zinc-700 rounded-lg">
                     <input type="email" placeholder="Enter Email" class="w-full p-2 mb-8 border border-zinc-300 dark:border-zinc-700 rounded-lg">
-                    <h2 class="text-xl font-semibold mb-4 text-zinc-900 dark:text-zinc-100">Pick Date and Time</h2>
+                    <h2 class="text-xl font-semibold mb-4 text-white">Pick Date and Time</h2>
                     <div class="bg-zinc-200 dark:bg-zinc-700 p-4 rounded-lg mb-8">
-                        <img src="https://placehold.co/250x200" alt="Calendar" class="w-full">
-                        <div class="flex justify-between items-center mt-4">
-                            <button class="bg-zinc-300 dark:bg-zinc-600 text-zinc-900 dark:text-zinc-100 px-4 py-2 rounded-lg">Next time</button>
-                            <button class="bg-zinc-300 dark:bg-zinc-600 text-zinc-900 dark:text-zinc-100 px-4 py-2 rounded-lg">Waitlist</button>
-                        </div>
+                        <input type="text" id="datepicker" class="w-full p-2 mb-4 border border-zinc-300 dark:border-zinc-700 rounded-lg"
+                            placeholder="Select Date">
+                        <input type="text" id="timepicker" class="w-full p-2 border border-zinc-300 dark:border-zinc-700 rounded-lg"
+                            placeholder="Select Time">
                     </div>
                 </div>
             </div>
             <div class="text-center">
-                <button onclick="showConfirmation()" class="bg-black text-white px-6 py-2 rounded-lg">Book Appointment</button>
+                <button onclick="showConfirmation()" class="bg-white text-black px-6 py-2 rounded-lg">Book Appointment</button>
                 <button onclick="toggleModal(false, 'appointmentModal')" class="mt-4 bg-red-500 text-white px-4 py-2 rounded-lg">Close</button>
             </div>
         </div>
@@ -317,25 +407,37 @@
             <footer class="mt-8 w-full text-center border-t pt-4">
                 <p class="font-bold">NOSTYLIST</p>
                 <div class="flex justify-center space-x-4 mt-2">
-                    <a href="#"><img aria-hidden="true" alt="facebook" src="https://placehold.co/20x20" /></a>
-                    <a href="#"><img aria-hidden="true" alt="linkedin" src="https://placehold.co/20x20" /></a>
-                    <a href="#"><img aria-hidden="true" alt="youtube" src="https://placehold.co/20x20" /></a>
-                    <a href="#"><img aria-hidden="true" alt="instagram" src="https://placehold.co/20x20" /></a>
+                    <a href="#"><img aria-hidden="true" alt="facebook" src="facebook.png" /></a>
+                    <a href="#"><img aria-hidden="true" alt="instagram" src="ig.png" /></a>
                 </div>
             </footer>
         </div>
     </div>
 
+    <!-- Contact Confirmation Modal -->
+    <div id="contactConfirmationModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden modal">
+        <div class="bg-white dark:bg-zinc-800 shadow-md rounded-lg p-8 max-w-4xl w-full">
+            <div class="text-center">
+                <h1 class="text-3xl font-bold mb-4">Thank You</h1>
+                <p class="mb-6">Thank you for contacting us. We'll get back to you shortly!</p>
+                <button onclick="toggleModal(false, 'contactConfirmationModal')" class="bg-black text-white py-2 px-4 rounded">Close</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
     <script>
         function toggleModal(show, modalId) {
             const modal = document.getElementById(modalId);
             if (show) {
                 modal.classList.remove('hidden');
+                document.body.classList.add('modal-open');
                 setTimeout(() => {
                     modal.classList.remove('opacity-0');
                 }, 10);
             } else {
                 modal.classList.add('opacity-0');
+                document.body.classList.remove('modal-open');
                 setTimeout(() => {
                     modal.classList.add('hidden');
                 }, 300);
@@ -346,6 +448,42 @@
             toggleModal(false, 'appointmentModal');
             toggleModal(true, 'confirmationModal');
         }
+
+        function showContactConfirmation(event) {
+            event.preventDefault();
+            toggleModal(true, 'contactConfirmationModal');
+        }
+
+        function selectStylist(element, name) {
+            document.querySelectorAll('.selected').forEach(img => {
+                img.classList.remove('selected');
+            });
+            element.classList.add('selected');
+        }
+
+        flatpickr("#datepicker", {
+            enableTime: false,
+            dateFormat: "Y-m-d",
+            theme: "dark"
+        });
+
+        flatpickr("#timepicker", {
+            enableTime: true,
+            noCalendar: true,
+            dateFormat: "H:i",
+            theme: "dark"
+        });
+
+        // Handle header transparency on scroll
+        window.addEventListener('scroll', function () {
+            const header = document.getElementById('header');
+            if (window.scrollY > 50) {
+                header.classList.add('scrolled-header');
+            } else {
+                header.classList.remove('scrolled-header');
+            }
+        });
     </script>
 </body>
+
 </html>
